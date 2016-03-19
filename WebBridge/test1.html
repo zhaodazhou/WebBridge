@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+            
+            <script type="text/javaScript">
+                
+                function testFunction1(userInfo){
+                    return document.location="function://"+userInfo;
+                }
+            
+                function webCallNative(userInfo) {
+                    var result = wdobject.shell_Req(userInfo)
+                    alert(result)
+                }
+            
+            </script>
+            
+            </head>
+    
+    <body>
+        <p>
+        第 1 个页面
+        </p >
+        <p>
+        <button type="text" id="text1" value="点击这里1" onclick="testFunction1('%7B%5C%22funcName%5C%22%3A%5C%22testFunction1%3A%5C%22%2C%5C%22userInfo%5C%22%3A%7B%5C%22cmdcode%5C%22%3A%5C%220101001%5C%22%2C%5C%22isBuffer%5C%22%3A%5C%221%5C%22%7D%7D')">调用URL重定向调用native端的函数</button>
+        </p >
+        
+        <p>
+        <button type="text" id="text2" value="点击这里2" onclick=wdobject.shell_Req('%7B%0A%20%20%22operate%22%20:%20%22pagejumpForSelect%22,%0A%20%20%22data%22%20:%20%7B%0A%20%20%20%20%22param2%22%20:%20%222%22,%0A%20%20%20%20%22param1%22%20:%20%221%22%0A%20%20%7D%0A%7D')>通过注入对象wdobject的shell_Req调用native端的局部函数</button>
+        
+        </p >
+        
+        <p>
+        <button type="text" id="text2" value="点击这里2" onclick=wdobject.shell_Req('%7B%0A%20%20%22operate%22%20:%20%22callGlobalFunc%22,%0A%20%20%22data%22%20:%20%7B%0A%20%20%20%20%22param2%22%20:%20%222%22,%0A%20%20%20%20%22param1%22%20:%20%221%22%0A%20%20%7D%0A%7D')>通过注入对象wdobject的shell_Req调用native端的全局函数</button>
+        
+        </p >
+        
+        <p>
+        <button type="text" id="text2" value="点击这里2" onclick="webCallNative('%7B%0A%20%20%22operate%22%20:%20%22pagejumpForSelect%22,%0A%20%20%22data%22%20:%20%7B%0A%20%20%20%20%22param2%22%20:%20%222%22,%0A%20%20%20%20%22param1%22%20:%20%221%22%0A%20%20%7D%0A%7D')">
+            通过注入对象wdobject的shell_Req调用native端的局部函数</button>
+        
+        </p >
+        
+        <p>
+        <button type="text" id="text2" value="点击这里2" onclick="webCallNative('%7B%0A%20%20%22operate%22%20:%20%22callGlobalFunc%22,%0A%20%20%22data%22%20:%20%7B%0A%20%20%20%20%22param2%22%20:%20%222%22,%0A%20%20%20%20%22param1%22%20:%20%221%22%0A%20%20%7D%0A%7D')">
+            通过注入对象wdobject的shell_Req调用native端的全局函数</button>
+        
+        </p >
+        
+        
+        
+        <p>
+        <a href="test2.html"> go to test2.html </a >
+        </p >
+        
+    </body>
+    
+    <script type = "text/javaScript" src = "work.js"> </script>
+    
+</html>

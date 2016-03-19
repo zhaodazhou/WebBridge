@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+            
+            <script type="text/javaScript">
+                
+                
+                function NativeCallWebBywdobject(userInfo){
+                    wdobject.webCallNative('web call native by wdobject');
+                }
+            
+                </script>
+            
+            </head>
+    
+    <body>
+        <p>
+        第 2 个页面
+        </p >
+        
+        <button type="text" id="text1" value="点击这里1" onclick="NativeCallWebBywdobject('call NativeCallWebBywdobject')">调用函数NativeCallWebBywdobject调用native端</button>
+        </p >
+        
+        <p>
+        <button type="text" id="text2" value="点击这里2" onclick=wdobject.shell_Req('%7B%0A%20%20%22operate%22%20:%20%22pagejumpForSelect%22,%0A%20%20%22data%22%20:%20%7B%0A%20%20%20%20%22param2%22%20:%20%222%22,%0A%20%20%20%20%22param1%22%20:%20%221%22%0A%20%20%7D%0A%7D')>通过注入对象wdobject的shell_Req调用native端的局部函数</button>
+        
+        </p >
+        
+        <p>
+        <button type="text" id="text2" value="点击这里2" onclick=wdobject.shell_Req('%7B%0A%20%20%22operate%22%20:%20%22callGlobalFunc%22,%0A%20%20%22data%22%20:%20%7B%0A%20%20%20%20%22param2%22%20:%20%222%22,%0A%20%20%20%20%22param1%22%20:%20%221%22%0A%20%20%7D%0A%7D')>通过注入对象wdobject的shell_Req调用native端的全局函数</button>
+        
+        </p >
+        
+    </body>
+    
+    <script type = "text/javaScript" src = "work.js"> </script>
+    
+</html>
