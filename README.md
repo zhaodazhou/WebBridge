@@ -12,3 +12,10 @@ web端与native端的交互的方式有
     [_mWebView registerFunc:@"pagejumpForSelect" observer:self selector:@selector(pagejumpForSelect:webView:) isOnMainThread:YES];
     
     web端的js代码可以通过函数名pagejumpForSelect来调用native端的pagejumpForSelect:webView:函数。
+
+
+# 如何在release模式下进行真机调试？
+1：编辑工程的scheme模式，将【Run】模式下的【Build Configuration】选项设置为Release模式；
+2：设置工程的【Build Settings】，将【Code Signing Identity】与【Provisioning Profile】的Release的设置为相应的开发者cer和pro证书。
+
+这个，就能在release模式下进行真机调试，毕竟有些问题在debug模式下是不复现的，而在release模式下却必现（比如对象的延迟释放问题）。
