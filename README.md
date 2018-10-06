@@ -1,4 +1,5 @@
 # WebBridge
+
 实际业务中，通过web端来展示某些功能的需求变得越来越多。为了方便web端与native端的交互，特意的开发了此库，便于各个业务部门开发自己的web后，native端能方便的进行支持。
 
 native端与web端的交互一般有URL重定向的方式和通过JavaScriptCore这2种方式。
@@ -33,4 +34,14 @@ native端与web端的交互一般有URL重定向的方式和通过JavaScriptCore
 
 ### 涉及技术
 category技术，JSExport协议，Method Swizzle技术和关联对象技术。
+
+
+
+
+
+# 如何在release模式下进行真机调试？
+1：编辑工程的scheme模式，将【Run】模式下的【Build Configuration】选项设置为Release模式；
+2：设置工程的【Build Settings】，将【Code Signing Identity】与【Provisioning Profile】的Release的设置为相应的开发者cer和pro证书。
+
+这个，就能在release模式下进行真机调试，毕竟有些问题在debug模式下是不复现的，而在release模式下却必现（比如对象的延迟释放问题）。
 

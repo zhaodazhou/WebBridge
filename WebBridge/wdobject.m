@@ -17,7 +17,13 @@ static NSMutableDictionary * globalfuncObjectDict;
 
 @end
 
-
+@implementation NSObject (TS_JavaScriptContext)
+- (void) webView: (id)unused didCreateJavaScriptContext: (JSContext*) ctx forFrame: (id) frame
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"didCreateJavaScriptContext" object:nil];
+}
+@end
+    
 @implementation wdobject
 
 + (void)initialize
@@ -29,8 +35,14 @@ static NSMutableDictionary * globalfuncObjectDict;
 {
     if (self = [super init]) {
         _funcObjectDict = [NSMutableDictionary dictionary];
+         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreateJavaScriptContext:) name:@"didCreateJavaScriptContext" object:nil];
     }
     return self;
+}
+
+-(void)didCreateJavaScriptContext:(id)sender{
+    JSContext * jsContext = [self.mWebView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    jsContext[@"wdobject"] = self;
 }
 
 #pragma mark - register functions
@@ -222,6 +234,7 @@ static NSMutableDictionary * globalfuncObjectDict;
 
 - (void)dealloc
 {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
