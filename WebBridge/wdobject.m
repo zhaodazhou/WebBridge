@@ -141,9 +141,18 @@ static NSMutableDictionary * globalfuncObjectDict;
 - (NSDictionary *)serialization:(NSString *)jsonStr
 {
     NSError * error;
-    NSString * str = [jsonStr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSData * data = [str dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary * userInfoDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+    NSDictionary * userInfoDict;
+    @try {
+        NSString * str = [jsonStr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSData * data = [str dataUsingEncoding:NSUTF8StringEncoding];
+        userInfoDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+    } @catch (NSException *exception) {
+        NSLog(@"%@, %@", NSStringFromSelector(_cmd), exception);
+        return nil;
+    } @finally {
+        
+    }
+    
     
     if (error) {
         NSAssert(0, @"error info:%@", error);
@@ -202,7 +211,7 @@ static NSMutableDictionary * globalfuncObjectDict;
     }
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     id<UIWebViewDelegate> aDelegate = [webView delegate];
     

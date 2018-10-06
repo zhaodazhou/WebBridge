@@ -120,8 +120,19 @@ static char wdobjectKey;
 - (nullable NSString *)nativeCallWebByDict:(nonnull NSDictionary *)dict
 {
     NSError * error;
-    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
-    NSString * jsonString = [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSData * jsonData;
+    NSString * jsonString;
+    
+    @try {
+        jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
+        jsonString = [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    } @catch (NSException *exception) {
+        NSLog(@"%@, %@", NSStringFromSelector(_cmd), exception);
+        return nil;
+    } @finally {
+        
+    }
+    
     
     if (error) {
         NSAssert(NO, @"error : %@", error);
