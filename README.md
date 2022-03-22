@@ -28,7 +28,7 @@ native端与web端的交互一般有URL重定向的方式和通过JavaScriptCore
 
 ### 主要思路
 1. 在UIWebView的load系统函数中，对initWithFrame、initWithCoder、delegate的setter与getter函数进行method swizzling。
-将一个的wdobject对象赋值给WebView对象的delegate（实现UIWebViewDelegate协议中函数的拦截），当业务端进行setDelegate时，通过关键对象技术，将设置对应保存下来，以便于拦截以后，再回调到业务端的实现；
+将一个的wdobject对象赋值给WebView对象的delegate（实现UIWebViewDelegate协议中函数的拦截），当业务端进行setDelegate时，通过关联对象技术，将设置对应保存下来，以便于拦截以后，再回调到业务端的实现；
 2. 通过JSExport协议注入的函数，可以直接给web端调用。native端实现该函数的具体功能，包括解析参数，判断函数是否可以支持被调用；
 3. 在注入函数方面，支持注入局部函数（某个webview对象可以调用），也支持全局函数（注入一次，所有的WebView对象都可以调用）。
 
